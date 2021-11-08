@@ -12,40 +12,50 @@ const Register = () => {
     const handleSubmit = (e) => {
 
         e.preventDefault()
-
-        setMessage({
-            out: "Creating your account...",
-            color: "alert-success"
-        })
-
-        fetch('http://localhost:4000/user/register', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name,
-                email,
-                password
+        
+        if (!name || !email || !password) {
+            setMessage({
+                out: `Please fill all the values`,
+                color: 'alert-danger'
             })
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                const hasError = data.error != null
+        }
+        else {
+            //setting display message for the user
+            setMessage({
+                out: "Creating your account...",
+                color: "alert-success"
+            })
 
-                setMessage({
-                    out: hasError ? `${data.error}` : `Congratulations, ${name}. You have been successfully registered!`,
-                    color: hasError ? 'alert-danger' : 'alert-success'
+            //making a POST request to the register API 
+            fetch('http://localhost:4000/user/register', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password
                 })
-
-                if(!hasError){
-                    e.target.reset()
-                    setTimeout(() => {
-                        setMessage(null)
-                    }, 4000)
-                }
             })
+                .then(res => res.json())
+                .then(data => {
+                    //handling errors
+                    const hasError = data.error != null
+
+                    setMessage({
+                        out: hasError ? `${data.error}` : `Congratulations, ${name}. You have been successfully registered!`,
+                        color: hasError ? 'alert-danger' : 'alert-success'
+                    })
+
+                    if (!hasError) {
+                        e.target.reset()
+                        setTimeout(() => {
+                            setMessage(null)
+                        }, 3000)
+                    }
+                })
+        }
     }
 
     return (
@@ -75,7 +85,7 @@ const Register = () => {
                     </div>
 
                     <div className="btnContainer d-flex justify-content-center align-items-center">
-                        <button type="submit" className="d-block btn btn-success" style={{ marginRight: '10px' }}>Submit</button>
+                        <button type="submit" className="d-block btn btn-success" style={{ marginRight: '10px' }}>Register</button>
                         <Link to="/login">
                             <button className="d-block btn btn-outline-danger"> Cancel</button>
                         </Link>
