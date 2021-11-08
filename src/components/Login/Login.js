@@ -30,11 +30,11 @@ const Login = () => {
             })
         })
             .then(res => res.json())
-            .then(data => {
+            .then(({ error, data}) => {
 
                 //detecting if request has any errors
-                const hasError = data.error != null
-                console.log(data);
+                const hasError = error != null
+                
                 //setting the message to be shown to the user based on the errors encountered
                 setMessage({
                     out: hasError ? `${data.error}`: `Logging you in...`,
@@ -47,10 +47,8 @@ const Login = () => {
                         localStorage.setItem('token', data.token) //storing the JWT token in localStorage
                         history.push('/dashboard')   //redirecting users to the dashboard
                     }, 3000)
-                }
-                
+                }  
             })
-
     }
 
     return (

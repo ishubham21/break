@@ -1,8 +1,10 @@
 import styles from './Register.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState } from 'react';
 
 const Register = () => {
+
+    const history = useHistory()
 
     const [name, setName] = useState(null)
     const [email, setEmail] = useState(null)
@@ -51,7 +53,7 @@ const Register = () => {
                     if (!hasError) {
                         e.target.reset()
                         setTimeout(() => {
-                            setMessage(null)
+                            history.push('/login')
                         }, 3000)
                     }
                 })

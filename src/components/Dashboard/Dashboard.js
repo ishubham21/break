@@ -4,7 +4,9 @@ import styles from './Dashboard.module.css'
 
 const Dashboard = () => {
 
-    const [dashboard, setDashboard] = useState(null)
+    const [loadingMsg, setLoadingMsg] = useState("Fetching your awesome codes, please wait!")
+
+    const [userData, setuserData] = useState(null)
     const history = useHistory()
 
     const logout = () => {
@@ -17,54 +19,33 @@ const Dashboard = () => {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": localStorage.getItem('token')    //setting headers to match the request
+                "auth-token": localStorage.getItem('token')
             }
         })
-        .then(res => res.json())
-        .then((data) => {
-            console.log(data);
-            const hasError = data.error != null
-            !hasError && setDashboard(data)
-        })
+            .then(res => res.json())
+            .then(({ error, data }) => {
+                const hasError = error != null
+                setLoadingMsg(null)
+                !hasError && setuserData(data)
+            })
+            .catch(error => {
+                setLoadingMsg("Some error occured, please try again!")
+            })
     }, [])
 
     return (
         <div className={styles.container}>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/">
-                    Code Executor
-                </a>
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarText"
-                    aria-controls="navbarText"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarText">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/dashboard">
-                                Dashboard <span className="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <span
-                                className="nav-link cursor-pointer"
-                                onClick={() => logout()}
-                            >
-                                Logout
-                            </span>
-                        </li>
-                    </ul>
-                    <span className="navbar-text">Welcome!</span>
-                </div>
-            </nav>
+
+            {loadingMsg && <div className={styles.loadinBlk}>
+                {loadingMsg}
+            </div>}
+
+            {userData && <div className={styles.wrapper}>
+                <button onClick={logout}> Logout</button>
+                Welcome, {userData.user.name}
+            </div>}
         </div>
+
     )
 }
 
