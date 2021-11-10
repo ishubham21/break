@@ -4,6 +4,7 @@ import Register from './Register/Register'
 import Login from './Login/Login'
 import Dashboard from './Dashboard/Dashboard'
 import NotFound from './NotFound/NotFound'
+import Editor from "./Editor/Editor";
 
 //implementing an auth guard from the token
 //Return the same component if the user is logged in, else redirect to the login page
@@ -22,8 +23,11 @@ const App = () => {
           <Route path='/register'>
             <Register />
           </Route>
+          <Route path='/dashboard/editor'>
+            {authGuard(Editor)}       { /* Securing the editor route */}
+          </Route>
           <Route path="/dashboard" >
-            {authGuard(Dashboard)}
+            {authGuard(Dashboard)}    { /* Securing the Dashboard route */}
           </Route>
           <Route exact path='/'>
             <Redirect to='/dashboard' />

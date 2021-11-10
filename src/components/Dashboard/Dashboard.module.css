@@ -1,8 +1,38 @@
-.container{
+*{
+    margin: 0;
     padding: 0;
+}
+
+.container *{
+    margin: 0;
+}
+
+.loadingBlk{
+    text-align: center;
+}
+
+.container{
+    height: 100vh;
+    color: #fff;
+}
+
+.navbar{
+    border-bottom: 1px solid #666;
+    padding: 20px 30px;
+}
+
+.headingBlk{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.headingBlk p, .brand{
     margin: 0;
 }
 
 .subContainer{
-    padding: 20px;
+    padding: 20px 30px;
+    display: flex;
 }

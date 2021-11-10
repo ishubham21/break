@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
+import CodeBlock from '../CodeBlock/CodeBlock'
 import styles from './Dashboard.module.css'
 
 const Dashboard = () => {
 
-    const [loadingMsg, setLoadingMsg] = useState("Fetching your awesome codes, please wait!")
+    //setting a loading msg before the content of the dashboard loads
+    const [loadingMsg, setLoadingMsg] = useState("Crunching your awesome codes, please wait!")
 
-    const [userData, setuserData] = useState(null)
+    //for navigating around the routes
+    const [userData, setUserData] = useState(null)
     const history = useHistory()
 
+    //for getting all the previous codes of the users 
+    const [userCodes, setUserCodes] = useState([])  //giving it an empty value to prevent unmount error
+
+    //function to clear users' data and redirect them to the login page
     const logout = () => {
         localStorage.clear()
         history.push('/login')
@@ -26,9 +34,14 @@ const Dashboard = () => {
             .then(res => res.json())
             .then(({ error, data }) => {
                 console.log(data)
-                const hasError = error != null
-                setLoadingMsg(null)
-                !hasError && setuserData(data)
+                const hasError = error != null      //checking for errors returned from the API
+
+                if (!hasError) {                      //setting values incase of no errors 
+                    setLoadingMsg(null)
+                    setUserData(data)
+                    setUserCodes(data.content)
+                }
+
             })
             .catch(error => {
                 setLoadingMsg("Some error occured, please try again!")
@@ -38,23 +51,34 @@ const Dashboard = () => {
     return (
         <div className={styles.container}>
 
-            {<div className={styles.loadinBlk}>
+            {<div className={styles.loadingBlk}>
                 {loadingMsg}
             </div>}
 
             {userData && <div className={styles.wrapper}>
 
-                <nav className={`${styles.navbar}`}>
-                    <div className={`d-flex align-items-center ${styles.subContainer}`}>
-                        <h4>Code Executor</h4>
-                        <div style={{ marginLeft: 'auto' }}>
-                            Welcome, {userData.user.name}
-                            <button className="btn btn-outline-danger mx-3" onClick={logout}>Logout</button>
-                        </div>
+                <nav className={`d-flex align-items-center ${styles.navbar} ${styles.subContainer}`}>
+
+                    <div className={styles.headingBlk}>
+                        <h4 className={styles.brand}>Code Executor</h4>
+                        <p>by developers, for developers</p>
+                    </div>
+
+                    <div className={`d-flex justify-content-center align-items-center`} style={{ marginLeft: 'auto' }}>
+                        <h6 >Welcome, {userData.user.name}</h6>
+                        <button className="btn btn-outline-danger mx-3" onClick={logout}>Logout</button>
                     </div>
                 </nav>
 
+                <div className={styles.subContainer}>
+                    {userCodes.map(codeDetails => (
+                        <CodeBlock fileName={codeDetails.fileName} code={codeDetails.code} input={codeDetails.input} language={codeDetails.language} userId={codeDetails.userId} key={codeDetails._id}/>
+                    ))}
+                </div>
 
+                <Link to='/dashboard/editor'>
+                    New
+                </Link>
 
             </div>}
         </div>
