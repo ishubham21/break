@@ -23,7 +23,7 @@ const App = () => {
           <Route path='/register'>
             <Register />
           </Route>
-          <Route path='/dashboard/editor'>
+          <Route path='/dashboard/code'>
             {authGuard(Editor)}       { /* Securing the editor route */}
           </Route>
           <Route path="/dashboard" >

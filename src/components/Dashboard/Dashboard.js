@@ -16,13 +16,11 @@ const Dashboard = () => {
     //for getting all the previous codes of the users 
     const [userCodes, setUserCodes] = useState([])  //giving it an empty value to prevent unmount error
 
-    //function to clear users' data and redirect them to the login page
+    //function to clear users' data from the localStorage and redirect them to the login page
     const logout = () => {
         localStorage.clear()
         history.push('/login')
     }
-
-    
 
     //running a function every time the dashboard is loaded
     useEffect(() => {
@@ -81,7 +79,7 @@ const Dashboard = () => {
                     ))}
                 </div>
 
-                <Link to='/dashboard/editor'>
+                <Link to='/dashboard/code'>
                     New
                 </Link>
 
