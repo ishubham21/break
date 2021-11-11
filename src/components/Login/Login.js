@@ -19,6 +19,8 @@ const Login = () => {
             color: 'alert-success'
         })
 
+        //sending a post request to the specified URL 
+        //with email and password as the body of the request
         fetch('http://localhost:4000/user/login', {
             method: 'POST',
             headers: {
@@ -41,6 +43,7 @@ const Login = () => {
                     color: hasError ? 'alert-danger': `alert-success`
                 })
 
+                //in case of no errors wait for 3s and redirect the user to the dashboard
                 if(!hasError){
                     e.target.reset()
                     setTimeout(() => {

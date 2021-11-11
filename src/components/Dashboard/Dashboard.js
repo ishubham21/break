@@ -22,6 +22,8 @@ const Dashboard = () => {
         history.push('/login')
     }
 
+    
+
     //running a function every time the dashboard is loaded
     useEffect(() => {
         fetch('http://localhost:4000/dashboard', {
@@ -70,9 +72,12 @@ const Dashboard = () => {
                     </div>
                 </nav>
 
+                <p className={styles.codesHead}>My Codes</p>
+
                 <div className={styles.subContainer}>
+
                     {userCodes.map(codeDetails => (
-                        <CodeBlock fileName={codeDetails.fileName} code={codeDetails.code} input={codeDetails.input} language={codeDetails.language} userId={codeDetails.userId} key={codeDetails._id}/>
+                        <CodeBlock fileName={codeDetails.fileName} codeId={codeDetails._id} userId={codeDetails.userId} key={codeDetails._id}/>
                     ))}
                 </div>
 
