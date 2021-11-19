@@ -52,6 +52,12 @@ const Login = () => {
                     }, 3000)
                 }  
             })
+            .catch(error => {
+                setMessage({
+                    out: 'Login failed, please check your connection and refresh.',
+                    color: 'alert-danger'
+                })
+            })
     }
 
     return (

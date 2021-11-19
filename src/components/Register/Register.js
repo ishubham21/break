@@ -57,6 +57,11 @@ const Register = () => {
                         }, 3000)
                     }
                 })
+                .catch(error => {
+                    setMessage({
+                        out: 'Registration failed, please check your connection and refresh.'
+                    })
+                })
         }
     }
 
