@@ -8,16 +8,15 @@ const Dashboard = () => {
 
     //setting a loading msg before the content of the dashboard loads
     const [loadingMsg, setLoadingMsg] = useState("Crunching your awesome codes, please wait!")
+    const [notLoaded, setNotLoaded] = useState(true)    //using this to set the visbility of the loading message
 
     //for navigating around the routes
     const [userData, setUserData] = useState(null)
     const history = useHistory()
 
-    //for getting all the previous codes of the users 
-    const [userCodes, setUserCodes] = useState([])  //giving it an empty value to prevent unmount error
+    const [userCodes, setUserCodes] = useState(null)    //for getting all the previous codes of the users 
 
-    //function to clear users' data from the localStorage and redirect them to the login page
-    const logout = () => {
+    const logout = () => {  //function to clear users' data from the localStorage and redirect them to the login page
         localStorage.clear()
         history.push('/login')
     }
@@ -34,14 +33,14 @@ const Dashboard = () => {
             .then(res => res.json())
             .then(({ error, data }) => {
                 console.log(data)
+                
                 const hasError = error != null      //checking for errors returned from the API
-
                 if (!hasError) {                      //setting values incase of no errors 
                     setLoadingMsg(null)
                     setUserData(data)
                     setUserCodes(data.content)
+                    setNotLoaded(false)
                 }
-
             })
             .catch(error => {
                 setLoadingMsg("Some error occured, please try again!")
@@ -51,7 +50,7 @@ const Dashboard = () => {
     return (
         <div className={styles.container}>
 
-            {<div className={styles.loadingBlk}>
+            {notLoaded && <div className={styles.loadingBlk}>
                 {loadingMsg}
             </div>}
 
@@ -70,14 +69,14 @@ const Dashboard = () => {
                     </div>
                 </nav>
 
-                <p className={styles.codesHead}>My Codes</p>
-
-                <div className={styles.subContainer}>
-
-                    {userCodes.map(codeDetails => (
-                        <CodeBlock fileName={codeDetails.fileName} codeId={codeDetails._id} userId={codeDetails.userId} key={codeDetails._id}/>
-                    ))}
-                </div>
+                {userCodes && <div>
+                    <p className={styles.codesHead}>My Codes</p>
+                    <div className={styles.subContainer}>
+                        {userCodes.map(codeDetails => (
+                            <CodeBlock fileName={codeDetails.fileName} codeId={codeDetails._id} userId={codeDetails.userId} key={codeDetails._id} />
+                        ))}
+                    </div>
+                </div>}
 
                 <Link to='/dashboard/code'>
                     New
