@@ -7,11 +7,12 @@ import getRandomString from '../../helpers/getRandomString'
 
 const Ide = () => {
 
-    const [code, setCode] = useState(getCode('cpp'))    //getting a default template of cpp code
-    const [filename, setFileName] = useState(getRandomString()) //getting a random word as an initial value
-    const [language, setLanguage] = useState('cpp')
-    const [input, setInput] = useState(null)    //setting input to be null
-    const [userId, setUserId] = useState(sessionStorage.getItem('userId'))  //picking up the user id from the session storage
+    const [code, setCode] = useState(null)
+    const [filename, setFileName] = useState(null)
+    const [language, setLanguage] = useState(null)
+    const [input, setInput] = useState(null)
+    const [userId, setUserId] = useState(null)  //picking up the user id from the session storage
+    const [output, setOutput] = useState(null)
 
     //catching the codeId from the url
     //using useLocation hook to find the id
@@ -27,38 +28,52 @@ const Ide = () => {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": localStorage.getItem('token')
+                    "auth-token": localStorage.getItem('token') //to verify the request on the server-side
                 }
             })
                 .then(res => res.json())
-                .then(({ error, data }) => {
+                .then(async ({ error, data }) => {
                     if (error === null) {
                         console.log(data);
-                        // setCodeDetails(data)
+                        setCode(data.code)
+                        setInput(data.input)
+                        setLanguage(data.language)
+                        setFileName(await data.fileName.substring(0, data.fileName.indexOf('-')))
                     }
                 })
-        } else {
-            // setCodeDetails({
-            //     fileName: 'undefined',
-            //     code: '#include <iostream>'  //to be fetched from antoher file based on the selected language
-
-            // })
+        }
+        else {   //if a new code is loaded, setting it's default values
+            setCode(getCode('cpp'))
+            setFileName(getRandomString())
+            setLanguage('cpp')
+            setUserId(sessionStorage.getItem('userId'))
         }
     }, [])
 
     return (
         <div className={styles.container}>
-            <button>Save</button>
-            <button>Run</button>
-            <input type="text" name="filename" placeholder={'undefined'} />
-            <select name="language" id=""></select>
+            {code && <div>
 
-            <Editor
-                height="90vh"
-                defaultLanguage="cpp"
-                defaultValue={code}
-            />
+                <nav className={styles.navbar}>
+                    <button>Save</button>
+                    <button>Run</button>
+                    {filename && <input type="text" name="filename" value={filename} onChange={(e) => { setFileName(e.target.value) }} />}
+                </nav>
 
+                <div className={styles.ide}>
+                    <Editor
+                        height="90vh"
+                        theme="vs-dark"
+                        defaultLanguage="cpp"
+                        defaultValue={code}
+                    />
+                    <div className={styles.subContainer}>
+                        {input && <textarea name="input" placeholder="Your input here" value={input} onChange={(e) => { setInput(e.target.value) }}></textarea>}
+                        {output && <div className={styles.output}> {output} </div>}
+                        {!output && <div className={styles.output}> Your output will appear here</div>}
+                    </div>
+                </div>
+            </div>}
         </div>
     )
 }

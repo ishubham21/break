@@ -10,6 +10,7 @@ const getCode = language => {
             break;
         case 'javascript': return `console.log("Hello World!");`
             break;
+        default: return null
     }
 }
 
