@@ -52,28 +52,7 @@ const Ide = () => {
 
     return (
         <div className={styles.container}>
-            {code && <div>
-
-                <nav className={styles.navbar}>
-                    <button>Save</button>
-                    <button>Run</button>
-                    {filename && <input type="text" name="filename" value={filename} onChange={(e) => { setFileName(e.target.value) }} />}
-                </nav>
-
-                <div className={styles.ide}>
-                    <Editor
-                        height="90vh"
-                        theme="vs-dark"
-                        defaultLanguage="cpp"
-                        defaultValue={code}
-                    />
-                    <div className={styles.subContainer}>
-                        {input && <textarea name="input" placeholder="Your input here" value={input} onChange={(e) => { setInput(e.target.value) }}></textarea>}
-                        {output && <div className={styles.output}> {output} </div>}
-                        {!output && <div className={styles.output}> Your output will appear here</div>}
-                    </div>
-                </div>
-            </div>}
+            
         </div>
     )
 }
