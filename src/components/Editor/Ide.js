@@ -1,7 +1,6 @@
 import styles from './Ide.module.css'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
-import Editor from '@monaco-editor/react'
 import getCode from '../../helpers/getCode'
 import getRandomString from '../../helpers/getRandomString'
 

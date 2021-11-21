@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import CodeBlock from '../CodeBlock/CodeBlock'
+import Navbar from '../Navbar/Navbar'
 import styles from './Dashboard.module.css'
 
 const Dashboard = () => {
@@ -56,18 +57,7 @@ const Dashboard = () => {
 
             {userData && <div className={styles.wrapper}>
 
-                <nav className={`d-flex align-items-center ${styles.navbar} ${styles.subContainer}`}>
-
-                    <div className={styles.headingBlk}>
-                        <h4 className={styles.brand}>Code Executor</h4>
-                        <p>by developers, for developers</p>
-                    </div>
-
-                    <div className={`d-flex justify-content-center align-items-center`} style={{ marginLeft: 'auto' }}>
-                        <h6 >Welcome, {userData.user.name}</h6>
-                        <button className="btn btn-outline-danger mx-3" onClick={logout}>Logout</button>
-                    </div>
-                </nav>
+                <Navbar userName={userData.user.name} logout={logout}/>
 
                 {userCodes && <div>
                     <p className={styles.codesHead}>My Codes</p>
