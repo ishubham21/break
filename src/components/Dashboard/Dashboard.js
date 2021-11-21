@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     const logout = () => {  //function to clear users' data from the localStorage and redirect them to the login page
         localStorage.clear()
-        history.push('/login')
+        history.push('/')
     }
 
     //running a function every time the dashboard is loaded

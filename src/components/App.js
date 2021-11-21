@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
+import Home from './Home/Home'
 import Register from './Register/Register'
 import Login from './Login/Login'
 import Dashboard from './Dashboard/Dashboard'
@@ -9,7 +10,7 @@ import Ide from "./Editor/Ide";
 //implementing an auth guard from the token
 //Return the same component if the user is logged in, else redirect to the login page
 const authGuard = (Component) => {
-  return localStorage.getItem('token') ? <Component /> : <Redirect to='/login' />
+  return localStorage.getItem('token') ? <Component /> : <Redirect to='/' />
 }
 
 const App = () => {
@@ -17,11 +18,8 @@ const App = () => {
     <div className="App">
       <Router>
         <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/register'>
-            <Register />
+          <Route exact path='/'>
+            <Home />
           </Route>
           <Route path='/dashboard/code'>
             {authGuard(Ide)}       { /* Securing the editor route */}

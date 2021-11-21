@@ -93,7 +93,7 @@ const Register = () => {
 
                     <div className="btnContainer d-flex justify-content-center align-items-center">
                         <button type="submit" className="d-block btn btn-success" style={{ marginRight: '10px' }}>Register</button>
-                        <Link to="/login">
+                        <Link to="/">
                             <button className="d-block btn btn-outline-danger"> Cancel</button>
                         </Link>
                     </div>
