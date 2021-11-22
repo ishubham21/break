@@ -1,6 +1,7 @@
 import styles from './Login.module.css'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
+import { TextField } from '@mui/material'
 
 const Login = () => {
 
@@ -32,25 +33,25 @@ const Login = () => {
             })
         })
             .then(res => res.json())
-            .then(({ error, data}) => {
+            .then(({ error, data }) => {
 
                 //detecting if request has any errors
                 const hasError = error != null
-                
+
                 //setting the message to be shown to the user based on the errors encountered
                 setMessage({
-                    out: hasError ? `${data.error}`: `Logging you in...`,
-                    color: hasError ? 'alert-danger': `alert-success`
+                    out: hasError ? `${data.error}` : `Logging you in...`,
+                    color: hasError ? 'alert-danger' : `alert-success`
                 })
 
                 //in case of no errors wait for 3s and redirect the user to the dashboard
-                if(!hasError){
+                if (!hasError) {
                     e.target.reset()
                     setTimeout(() => {
                         localStorage.setItem('token', data.token) //storing the JWT token in localStorage
                         history.push('/dashboard')   //redirecting users to the dashboard
                     }, 3000)
-                }  
+                }
             })
             .catch(error => {
                 setMessage({
@@ -65,19 +66,13 @@ const Login = () => {
             <div className={styles.formContainer}>
                 <form onSubmit={handleSubmit}>
 
-                    <div className="mb-3">
-                        <label htmlFor="name" className="form-label">Your Email</label>
-                        <input type="name" className="form-control" id="email" aria-describedby="Your email address" placeholder="Your email address here" onChange={(e) => {
-                            setEmail(e.target.value)
-                        }} />
-                    </div>
+                    <TextField id="email" label="Email" variant="standard" margin="normal" color="secondary" sx={{ width: '100%' }} onChange={(e) => {
+                        setEmail(e.target.value)
+                    }} />
 
-                    <div className="mb-3">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="password" placeholder="Your password here" onChange={(e) => {
-                            setPassword(e.target.value)
-                        }} />
-                    </div>
+                    <TextField id="password" label="Password" type="password" variant="standard" margin="normal" color="secondary" sx={{ width: '100%' }} onChange={(e) => {
+                        setPassword(e.target.value)
+                    }} />
 
                     <div className="btnContainer d-flex justify-content-center align-items-center">
                         <button type="submit" className="d-block btn btn-success" style={{ marginRight: '10px' }}>Login</button>

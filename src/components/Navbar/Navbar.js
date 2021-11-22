@@ -11,7 +11,7 @@ const Navbar = ({ userName, logout }) => {
 
             <div className={`d-flex justify-content-center align-items-center`} style={{ marginLeft: 'auto' }}>
                 <h6 >Welcome, {userName}</h6>
-                <button className="btn btn-outline-danger mx-3" onClick={logout()}>Logout</button>
+                <button className="btn btn-outline-danger mx-3" onClick={() => { logout() }}>Logout</button>
             </div>
         </nav>
     </>)

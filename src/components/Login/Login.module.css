@@ -1,15 +1,22 @@
 .container{
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    height: 100%;
 }
 
 .formContainer{
-    width: 40%;
+    width: 50%;
     margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input{
+    color: #fff!important;
+    border-color: #fff;
+}
+
+label{
+    color: #fff!important;
 }
 
