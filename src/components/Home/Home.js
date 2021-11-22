@@ -1,5 +1,6 @@
 import styles from './Home.module.css'
 import Grid from '@mui/material/Grid'
+import peaceImg from './../../assets/smallScreen.png'
 
 const Home = () => {
     
@@ -8,7 +9,8 @@ const Home = () => {
     if(window.innerWidth < 800){
         return(
             <div className={styles.smallScreenMsg}>
-                Please open this window on a desktop
+                <img src={peaceImg} alt="Peace illustration" />
+                <strong>Please use a desktop to open this window</strong>
             </div>
         )
     }

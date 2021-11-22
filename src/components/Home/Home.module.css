@@ -1,4 +1,4 @@
-.smallScreenMsg{
+.smallScreenMsg {
     background-color: #23272A;
     color: #fff;
     width: 100%;
@@ -6,15 +6,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
-.container{
+.smallScreenMsg img {
+    max-width: 60%;
+    margin-bottom: 30px;
+    animation: upDown 2.5s linear reverse infinite;
+}
+
+.container {
     background-color: #23272A;
     position: relative;
     color: #fff;
 }
 
-.subContainer{
+.subContainer {
     width: 70%;
 
+}
+
+@keyframes upDown{
+    0%, 100%{
+        transform: translateY(-30px);
+    }
+    50%{
+        transform: translateY(0);
+    }
 }
