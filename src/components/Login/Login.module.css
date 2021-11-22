@@ -13,8 +13,10 @@
 
 input{
     color: #fff!important;
-    border-color: #fff;
+    border-color: #fff!important;
 }
+
+
 
 label{
     color: #fff!important;
