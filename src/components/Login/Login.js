@@ -1,27 +1,9 @@
 import styles from './Login.module.css'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-import { TextField } from '@mui/material'
-import { unstable_ClassNameGenerator as ClassNameGenerator } from '@mui/material/utils'
-import { makeStyles } from '@mui/styles'
-
-const useStyles = makeStyles({
-    root: {
-      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-      border: 0,
-      borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-      color: 'white',
-      height: 48,
-      padding: '0 30px',
-    },
-  });
+import { TextField, Button } from '@mui/material'
 
 const Login = () => {
-
-    const classes = useStyles()
-
-    // ClassNameGenerator.configure((component) => `inputField ${component}`)
 
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
@@ -51,14 +33,14 @@ const Login = () => {
             })
         })
             .then(res => res.json())
-            .then(({ error, data }) => {
+            .then(async ({ error, data }) => {
 
                 //detecting if request has any errors
-                const hasError = error != null
+                const hasError = await error != null
 
                 //setting the message to be shown to the user based on the errors encountered
                 setMessage({
-                    out: hasError ? `${data.error}` : `Logging you in...`,
+                    out: hasError ? `${error}` : `Logging you in...`,
                     color: hasError ? 'alert-danger' : `alert-success`
                 })
 
@@ -71,18 +53,12 @@ const Login = () => {
                     }, 3000)
                 }
             })
-            .catch(error => {
-                setMessage({
-                    out: 'Login failed, please check your connection and refresh.',
-                    color: 'alert-danger'
-                })
-            })
     }
 
     return (
         <div className={styles.container}>
             <div className={styles.formContainer}>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className={styles.sample}>
                     <TextField
                         id="email"
                         label="Email"
@@ -90,8 +66,8 @@ const Login = () => {
                         margin="normal"
                         color="secondary"
                         sx={{ width: '100%' }}
-                        className={classes.root}
                         onChange={(e) => { setEmail(e.target.value) }}
+                        required
                     />
                     <TextField
                         id="password"
@@ -100,13 +76,11 @@ const Login = () => {
                         variant="standard"
                         margin="normal"
                         color="secondary"
-                        sx={{ width: '100%' }}
+                        sx={{ width: '100%', marginBottom: '30px' }}
                         onChange={(e) => { setPassword(e.target.value) }}
+                        required
                     />
-
-                    <div className="btnContainer d-flex justify-content-center align-items-center">
-                        <button type="submit" className="d-block btn btn-success" style={{ marginRight: '10px' }}>Login</button>
-                    </div>
+                    <Button variant="contained" type="submit" color="secondary">Login</Button>
                 </form>
 
                 {message && <div className={`mt-4 text-center ${styles.statusText} ${message.color}`}>

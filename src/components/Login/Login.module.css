@@ -16,9 +16,11 @@ input{
     border-color: #fff!important;
 }
 
-
-
 label{
     color: #fff!important;
+}
+
+.sample div::before{
+    border-color: #fff!important;
 }
 
