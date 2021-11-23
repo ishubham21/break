@@ -8,7 +8,7 @@ import { Drawer, Box, AppBar } from '@mui/material'
 
 const Dashboard = () => {
 
-    const drawerWidth = 340 //for MUI drawer
+    const drawerWidth = 300 //for MUI drawer
 
     //setting a loading msg before the content of the dashboard loads
     const [loadingMsg, setLoadingMsg] = useState("Crunching your awesome codes, please wait!")
@@ -63,7 +63,10 @@ const Dashboard = () => {
                 <Box sx={{ display: 'flex', height: '100%' }}>
                     <AppBar
                         position="fixed"
-                        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+                        sx={{
+                            width: `calc(100% - ${drawerWidth}px)`,
+                            ml: `${drawerWidth}px`
+                        }}
                     >
                     </AppBar>
                     <Drawer
@@ -75,19 +78,24 @@ const Dashboard = () => {
                                 boxSizing: 'border-box',
                                 backgroundColor: '#5663F7',
                                 color: '#fff',
-                                height: '100%'
+                                borderTopRightRadius: '100px'
                             },
-                            height: '100%'
+                            height: '100%',
+                            position: 'relative',
+                            animation: 'slideIn 0.8s'
                         }}
                         variant="permanent"
                         anchor="left"
                     >
                         <Navbar userName={userData.user.name} logout={logout} />
                     </Drawer>
-                    
+
                     <Box
                         component="main"
-                        sx={{ flexGrow: 1, p: 3 }}
+                        sx={{
+                            flexGrow: 1,
+                            p: 3
+                        }}
                     >
                         {userCodes && <div>
                             <p className={styles.codesHead}>My Codes</p>

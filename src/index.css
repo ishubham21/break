@@ -25,3 +25,12 @@ a{
 .inputField::before{
   border-color: #fff!important;
 }
+
+@keyframes slideIn{
+  0%{
+    transform: translateX(-200px);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
