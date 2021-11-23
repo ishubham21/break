@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 input{
@@ -18,6 +19,13 @@ input{
 
 label{
     color: #fff!important;
+}
+
+.noAccount{
+    text-align: left;
+    margin-top: 40px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .sample div::before{

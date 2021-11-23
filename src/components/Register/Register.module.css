@@ -1,15 +1,34 @@
 .container{
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    height: 100%;
 }
 
 .formContainer{
-    width: 40%;
+    width: 50%;
     margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input{
+    color: #fff!important;
+    border-color: #fff!important;
+}
+
+label{
+    color: #fff!important;
+}
+
+.noAccount{
+    text-align: left;
+    margin-top: 40px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sample div::before{
+    border-color: #fff!important;
 }
 

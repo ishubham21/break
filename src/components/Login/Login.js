@@ -3,11 +3,9 @@ import { useState } from 'react'
 import { useHistory } from 'react-router'
 import { TextField, Button } from '@mui/material'
 
-const Login = () => {
-
+const Login = ({ setStatusText, setIsLogin }) => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
-    const [message, setMessage] = useState(null)
 
     //for redirection purposes
     const history = useHistory();
@@ -15,14 +13,13 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        setMessage({
-            out: `Please wait...`,
-            color: 'alert-success'
+        setStatusText({
+            text: "Please wait...",
+            severity: "info"
         })
 
-        //sending a post request to the specified URL 
-        //with email and password as the body of the request
-        fetch('http://localhost:4000/user/login', {
+        //sending a post request to the specified URL with email and password as the body of the request
+        const requestOptions = {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -31,25 +28,30 @@ const Login = () => {
                 email,
                 password
             })
-        })
+        }
+
+        fetch('http://localhost:4000/user/login', requestOptions)
             .then(res => res.json())
-            .then(async ({ error, data }) => {
+            .then(({ error, data }) => {
 
                 //detecting if request has any errors
-                const hasError = await error != null
+                const hasError = error != null
 
                 //setting the message to be shown to the user based on the errors encountered
-                setMessage({
-                    out: hasError ? `${error}` : `Logging you in...`,
-                    color: hasError ? 'alert-danger' : `alert-success`
+                setStatusText({
+                    text: hasError ? `${error}` : `Logging you in...`,
+                    severity: hasError ? 'error' : `success`
                 })
 
                 //in case of no errors wait for 3s and redirect the user to the dashboard
                 if (!hasError) {
                     e.target.reset()
+                    localStorage.setItem('token', data.token)
+
+                    //redirecting users to the dashboard after 3s
                     setTimeout(() => {
-                        localStorage.setItem('token', data.token) //storing the JWT token in localStorage
-                        history.push('/dashboard')   //redirecting users to the dashboard
+                        setStatusText(null)    //nullifying this to remove the value from the home    
+                        history.push('/dashboard')
                     }, 3000)
                 }
             })
@@ -82,10 +84,7 @@ const Login = () => {
                     />
                     <Button variant="contained" type="submit" color="secondary">Login</Button>
                 </form>
-
-                {message && <div className={`mt-4 text-center ${styles.statusText} ${message.color}`}>
-                    {message.out}
-                </div>}
+                <p className={styles.noAccount} onClick={() => {setIsLogin(false)}}>Don't have an account?</p>
             </div>
         </div>
     )
