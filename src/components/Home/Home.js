@@ -10,7 +10,7 @@ const Home = () => {
 
     const [isLogin, setIsLogin] = useState(true)    //decides which component to render
     const [statusText, setStatusText] = useState(null)  //to set the alert toast
-
+    
     //making sure that the window is opened only in the desktop window
     const width = window.innerWidth
     if (window.innerWidth < 800) {

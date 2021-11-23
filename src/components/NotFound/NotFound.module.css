@@ -1,4 +1,33 @@
 .container{
     padding: 0;
     margin: 0;
+    background-color: #23272A;
+}
+
+.sideBlk{
+    width: 37%;
+    height: 100vh;
+    background-color: #5663F7;
+}
+
+.para{
+    font-size: 20px;
+}
+
+.paraContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}
+
+.paraContainer a{
+    color: #fff;
+}
+
+.fourOFour{
+    font-size: 80px;
+    font-weight: 600;
+    text-align: center;
 }

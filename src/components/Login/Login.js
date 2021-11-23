@@ -6,7 +6,6 @@ import { TextField, Button } from '@mui/material'
 const Login = ({ setStatusText, setIsLogin }) => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
-
     //for redirection purposes
     const history = useHistory();
 
@@ -29,7 +28,6 @@ const Login = ({ setStatusText, setIsLogin }) => {
                 password
             })
         }
-
         fetch('http://localhost:4000/user/login', requestOptions)
             .then(res => res.json())
             .then(({ error, data }) => {

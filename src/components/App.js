@@ -31,7 +31,7 @@ const App = () => {
             <Route exact path='/'>
               <Redirect to='/dashboard' />
             </Route>
-            <Route path='*'>
+            <Route path="">
               <NotFound />
             </Route>
           </Switch>
