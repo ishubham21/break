@@ -3,10 +3,6 @@
     padding: 0;
 }
 
-.container *{
-    margin: 0;
-}
-
 .loadingBlk{
     text-align: center;
     background-color: #222;
@@ -19,9 +15,8 @@
 .container{
     height: 100vh;
     color: #fff;
+    background-color: #23272A;
 }
-
-
 
 .subContainer{
     padding: 20px 30px;
@@ -33,4 +28,8 @@
     text-align: center;
     font-size: 25px;
     font-weight: bold;
+}
+
+.wrapper{
+    height: 100%;
 }

@@ -1,0 +1,22 @@
+.brand{
+    font-size: 35px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.logoutBtn{
+    color: #fff;
+    background-color: #fff;
+    color: #5663F7;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logoutBtn:hover{
+    border: 1px solid #fff;
+    background-color: #5663F7;
+    color: #fff;
+}
