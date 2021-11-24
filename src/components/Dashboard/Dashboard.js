@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-import CodeBlock from '../CodeBlock/CodeBlock'
+import CodeBlock from './components/CodeBlock/CodeBlock'
 import Navbar from '../Navbar/Navbar'
 import styles from './Dashboard.module.css'
 import { Drawer, Box, AppBar } from '@mui/material'
@@ -35,15 +35,17 @@ const Dashboard = () => {
             }
         })
             .then(res => res.json())
-            .then(({ error, data }) => {
-                console.log(data)
-
+            .then(async({ error, data }) => {
                 const hasError = error != null      //checking for errors returned from the API
                 if (!hasError) {                      //setting values incase of no errors 
                     setLoadingMsg(null)
-                    setUserData(data)
+                    setUserData(data.user)
                     setUserCodes(data.content)
                     setNotLoaded(false)
+
+                    //storing the userId in sessionStorage to use it in Editor.js
+                    //using sessionStorage because this data is rendered each time the user opens dashboard (due to useEffect hook) and hence no need to store the data after the tab has been closed 
+                    sessionStorage.setItem('userId', await userData.userId)
                 }
             })
             .catch(error => {
@@ -87,24 +89,24 @@ const Dashboard = () => {
                         variant="permanent"
                         anchor="left"
                     >
-                        <Navbar userName={userData.user.name} logout={logout} />
+                        <Navbar userName={userData.name} logout={logout} />
                     </Drawer>
 
-                    <Box
-                        component="main"
+                    <Box component="main"
                         sx={{
                             flexGrow: 1,
                             p: 3
-                        }}
-                    >
-                        {userCodes && <div>
+                        }}>
+
+
+                        {userCodes && <Box>
                             <p className={styles.codesHead}>My Codes</p>
                             <div className={styles.subContainer}>
-                                {userCodes.map(codeDetails => (
-                                    <CodeBlock fileName={codeDetails.fileName} codeId={codeDetails._id} userId={codeDetails.userId} key={codeDetails._id} />
+                                {userCodes.map(code => (
+                                    <CodeBlock fileName={code.fileName} codeId={code._id} lang={code.language} key={code._id} />
                                 ))}
                             </div>
-                        </div>}
+                        </Box>}
 
                         <Link to='/dashboard/code'>
                             New
