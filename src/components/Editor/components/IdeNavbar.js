@@ -1,9 +1,8 @@
-import { Button } from '@mui/material'
-import { Box } from '@mui/system'
+import { Button, Box, Select, MenuItem } from '@mui/material'
 import { Link, useHistory } from 'react-router-dom'
 import styles from './../Ide.module.css'
 
-const IdeNavbar = ({ fileName, setFileName }) => {
+const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
 
     const history = useHistory()
 
@@ -13,7 +12,6 @@ const IdeNavbar = ({ fileName, setFileName }) => {
     }
 
     return (<>
-
         <Box sx={{
             backgroundColor: '#5663F7',
             height: '8vh',
@@ -24,34 +22,92 @@ const IdeNavbar = ({ fileName, setFileName }) => {
             <Link to='/'>
                 <h4 className={styles.heading}>Break</h4>
             </Link>
-            <Button
-                variant="contained"
-                type="submit"
-                sx={{
-                    color: '#fff',
-                    backgroundColor: '#fff',
-                    color: '#5663F7',
-                    position: 'absolute',
-                    right: '25px',
-                    '&:hover': {
-                        border: '1px solid #fff',
-                        backgroundColor: '#5663F7',
-                        color: '#fff'
-                    }
-                }}
-            onClick={() => { logout() }} 
-            >
-                Logout
-            </Button>
+            <Box sx={{
+                marginLeft: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                marginRight: '25px'
+            }}>
+
+                <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                        color: '#fff',
+                        backgroundColor: '#fff',
+                        color: '#5663F7',
+                        marginRight: '15px',
+                        '&:hover': {
+                            border: '1px solid #fff',
+                            backgroundColor: '#5663F7',
+                            color: '#fff'
+                        }
+                    }}
+                    onClick={() => { logout() }}
+                >
+                    Run
+                </Button>
+
+                <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                        color: '#fff',
+                        backgroundColor: '#fff',
+                        color: '#5663F7',
+                        marginRight: '15px',
+                        '&:hover': {
+                            border: '1px solid #fff',
+                            backgroundColor: '#5663F7',
+                            color: '#fff'
+                        }
+                    }}
+                    onClick={() => { saveCode() }}
+                >
+                    Save
+                </Button>
+
+                {fileName && <input id="filename" name="filename" type="text" value={fileName} className={styles.fileName} onChange={(e) => { setFileName(e.target.value) }} />}
+
+                {lang && <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={lang}
+                    label="Language"
+                    sx={{
+                        color: '#fff',
+                        borderColor: '#fff',
+                        marginRight: '35px'
+                    }}
+                    onChange={(e) => { console.log(e.target.value); setLanguage(e.target.value) }}
+                >
+                    <MenuItem value={'c'}>C</MenuItem>
+                    <MenuItem value={'cpp'}>C++</MenuItem>
+                    <MenuItem value={'java'}>Java</MenuItem>
+                    <MenuItem value={'py'}>Python</MenuItem>
+                    <MenuItem value={'javascript'}>JavaScript</MenuItem>
+
+                </Select>}
+
+                <Button
+                    variant="contained"
+                    type="submit"
+                    sx={{
+                        color: '#fff',
+                        backgroundColor: '#fff',
+                        color: '#5663F7',
+                        '&:hover': {
+                            border: '1px solid #fff',
+                            backgroundColor: '#5663F7',
+                            color: '#fff'
+                        }
+                    }}
+                    onClick={() => { logout() }}
+                >
+                    Logout
+                </Button>
+            </Box>
         </Box>
-        <nav>
-
-            <div className={`d-flex justify-content-center align-items-center`} style={{ marginLeft: 'auto' }}>
-                {/* <p>Welcome, {userName}</p> */}
-
-
-            </div>
-        </nav>
     </>)
 }
 

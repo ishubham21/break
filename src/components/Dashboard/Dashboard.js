@@ -47,7 +47,7 @@ const Dashboard = () => {
 
                     //storing the userId in sessionStorage to use it in Editor.js
                     //using sessionStorage because this data is rendered each time the user opens dashboard (due to useEffect hook) and hence no need to store the data after the tab has been closed 
-                    sessionStorage.setItem('userId', await userData.userId)
+                    sessionStorage.setItem('userId', data.user.id)
                 }
             })
             .catch(error => {

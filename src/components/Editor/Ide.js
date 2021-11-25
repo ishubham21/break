@@ -20,6 +20,25 @@ const Ide = () => {
     const search = useLocation().search
     const codeId = new URLSearchParams(search).get('id');
 
+    //function to create a request
+    const saveCode = () => {
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fileName, code, input, userId, language
+            })
+        }
+        fetch('http://localhost:4000/ide/save', requestOptions)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+
     //rendering this code each time the user opens his/her old codes
     useEffect(() => {
         //if id is not null that means the user is creating a new code
@@ -53,7 +72,7 @@ const Ide = () => {
     return (
         <>
             {code && <div className={styles.container}>
-                <IdeNavbar fileName={fileName} setFileName={setFileName} />
+                <IdeNavbar lang={language} fileName={fileName} setFileName={setFileName} saveCode={saveCode} setLanguage={setLanguage}/>
                 <CodeEditor code={code} />
             </div>}
         </>
