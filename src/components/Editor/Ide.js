@@ -3,14 +3,16 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
 import getCode from '../../helpers/getCode'
 import getRandomString from '../../helpers/getRandomString'
+import IdeNavbar from './components/IdeNavbar'
+import CodeEditor from './components/CodeEditor'
 
 const Ide = () => {
 
     const [code, setCode] = useState(null)
-    const [filename, setFileName] = useState(null)
+    const [fileName, setFileName] = useState(null)
     const [language, setLanguage] = useState(null)
     const [input, setInput] = useState(null)
-    const [userId, setUserId] = useState(null)  //picking up the user id from the session storage
+    const userId = sessionStorage.getItem('userId') //picking up the user id from the session storage
     const [output, setOutput] = useState(null)
 
     //catching the codeId from the url
@@ -45,14 +47,16 @@ const Ide = () => {
             setCode(getCode('cpp'))
             setFileName(getRandomString())
             setLanguage('cpp')
-            setUserId(sessionStorage.getItem('userId'))
         }
     }, [])
 
     return (
-        <div className={styles.container}>
-            
-        </div>
+        <>
+            {code && <div className={styles.container}>
+                <IdeNavbar fileName={fileName} setFileName={setFileName} />
+                <CodeEditor code={code} />
+            </div>}
+        </>
     )
 }
 

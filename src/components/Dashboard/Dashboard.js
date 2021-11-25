@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import CodeBlock from './components/CodeBlock/CodeBlock'
 import Navbar from '../Navbar/Navbar'
 import styles from './Dashboard.module.css'
-import { Drawer, Box, AppBar, Fab } from '@mui/material'
+import { Drawer, Box, AppBar, Fab, Card } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
+import codingImg from './../../assets/coding.png'
 
 const Dashboard = () => {
 
@@ -96,9 +97,24 @@ const Dashboard = () => {
                     <Box component="main"
                         sx={{
                             flexGrow: 1,
-                            p: 3
+                            p: 3,
+                            position: 'relative'
                         }}>
 
+                        {/* <Box sx={{
+                            width: '70%',
+                            padding: '30px 10px',
+                            borderRadius: '8px',
+                            margin: '20px auto',
+                            color: '#000',
+                            backgroundColor: '#fff',
+                            position: 'relative',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <img src={codingImg} alt="Coding Illustration" className={styles.codingImg}/>
+                        </Box> */}
 
                         {userCodes && <Box>
                             <p className={styles.codesHead}>My Codes</p>
@@ -112,12 +128,14 @@ const Dashboard = () => {
                             </Box>
                         </Box>}
 
-                        <Link to='/dashboard/code'>
+                        <Link to='/dashboard/code' x={{ display: 'block' }}>
                             <Fab
                                 color="secondary"
                                 aria-label="language"
                                 sx={{
-                                    marginLeft: '20px'
+                                    position: 'absolute',
+                                    bottom: '70px',
+                                    right: '70px'
                                 }}
                             >
                                 <AddIcon />

@@ -11,6 +11,7 @@ const Navbar = ({ userName, logout }) => {
 
             <div className={`d-flex justify-content-center align-items-center`} style={{ marginLeft: 'auto' }}>
                 <p className={styles.username} >Welcome, {userName}</p>
+                
                 <Button
                     variant="contained"
                     type="submit"

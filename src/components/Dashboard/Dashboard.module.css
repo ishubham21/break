@@ -5,7 +5,7 @@
 
 .loadingBlk{
     text-align: center;
-    background-color: #222;
+    background-color: #23272A;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -27,4 +27,20 @@
 
 .wrapper{
     height: 100%;
+}
+
+.codingImg{
+    max-width: 35%;
+    display: block;
+    animation: upDown 2s linear infinite reverse;
+}
+
+@keyframes upDown{
+    0%, 100%{
+        transform: translateY(-10px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+
 }
