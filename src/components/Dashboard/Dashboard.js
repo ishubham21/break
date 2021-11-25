@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import CodeBlock from './components/CodeBlock/CodeBlock'
 import Navbar from '../Navbar/Navbar'
 import styles from './Dashboard.module.css'
-import { Drawer, Box, AppBar } from '@mui/material'
+import { Drawer, Box, AppBar, Fab } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
 
 const Dashboard = () => {
 
@@ -35,7 +36,7 @@ const Dashboard = () => {
             }
         })
             .then(res => res.json())
-            .then(async({ error, data }) => {
+            .then(async ({ error, data }) => {
                 const hasError = error != null      //checking for errors returned from the API
                 if (!hasError) {                      //setting values incase of no errors 
                     setLoadingMsg(null)
@@ -101,15 +102,26 @@ const Dashboard = () => {
 
                         {userCodes && <Box>
                             <p className={styles.codesHead}>My Codes</p>
-                            <div className={styles.subContainer}>
+                            <Box sx={{
+                                display: 'flex',
+                                padding: '10px'
+                            }}>
                                 {userCodes.map(code => (
                                     <CodeBlock fileName={code.fileName} codeId={code._id} lang={code.language} key={code._id} />
                                 ))}
-                            </div>
+                            </Box>
                         </Box>}
 
                         <Link to='/dashboard/code'>
-                            New
+                            <Fab
+                                color="secondary"
+                                aria-label="language"
+                                sx={{
+                                    marginLeft: '20px'
+                                }}
+                            >
+                                <AddIcon />
+                            </Fab>
                         </Link>
 
                     </Box>

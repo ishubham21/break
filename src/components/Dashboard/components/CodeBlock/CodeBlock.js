@@ -1,9 +1,8 @@
-import styles from './CodeBlock.module.css'
 import { useHistory } from 'react-router'
 import { Card, Fab } from '@mui/material'
 
 
-const CodeBlock = ({ fileName, codeId }) => {
+const CodeBlock = ({ fileName, codeId, lang }) => {
 
     //slicing the string to keep the part before -
     fileName = fileName.substring(0, fileName.indexOf('-'))
@@ -18,11 +17,12 @@ const CodeBlock = ({ fileName, codeId }) => {
         <Card
             variant="outlined"
             sx={{
-                flex: '0 0 10%',
-                padding: '10px',
+                flex: '0 0 15%',
+                padding: '10px 0px',
                 textAlign: 'center',
                 cursor: 'pointer',
-                marginLeft: '15px'
+                marginLeft: '20px',
+                position: 'relative'
             }}
             onClick={() => { loadEditor(codeId) }}
         >
@@ -32,10 +32,10 @@ const CodeBlock = ({ fileName, codeId }) => {
                 size="small"
                 aria-label="language"
                 sx={{
-                    marginLeft: '10px'
+                    marginLeft: '20px'
                 }}
             >
-                {/* <AddIcon /> */}
+                {lang}
             </Fab>
         </Card>
     )
