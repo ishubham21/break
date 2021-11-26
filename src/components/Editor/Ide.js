@@ -11,7 +11,7 @@ const Ide = () => {
     const [code, setCode] = useState(null)
     const [fileName, setFileName] = useState(null)
     const [language, setLanguage] = useState(null)
-    const [input, setInput] = useState(null)
+    const [input, setInput] = useState(0)    //since input is required during the post request
     const userId = sessionStorage.getItem('userId') //picking up the user id from the session storage
     const [output, setOutput] = useState(null)
 
@@ -33,10 +33,10 @@ const Ide = () => {
             })
         }
         fetch('http://localhost:4000/ide/save', requestOptions)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
     }
 
     //rendering this code each time the user opens his/her old codes
@@ -72,8 +72,18 @@ const Ide = () => {
     return (
         <>
             {code && <div className={styles.container}>
-                <IdeNavbar lang={language} fileName={fileName} setFileName={setFileName} saveCode={saveCode} setLanguage={setLanguage}/>
-                <CodeEditor code={code} />
+                <IdeNavbar
+                    lang={language}
+                    fileName={fileName}
+                    setFileName={setFileName}
+                    saveCode={saveCode}
+                    setLanguage={setLanguage}
+                />
+                <CodeEditor
+                    code={code}
+                    setCode={setCode}
+                    setInput={setInput}
+                />
             </div>}
         </>
     )

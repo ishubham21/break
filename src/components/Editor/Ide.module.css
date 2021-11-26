@@ -1,7 +1,7 @@
 .container{
     height: 100vh;
     background-color: #23272A;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .heading{
@@ -18,4 +18,16 @@
     outline: 0;
     border-radius: 5px;
     margin-right: 10px;
+}
+
+.inputBox{
+    width: 100%;
+    margin-top: 10px;
+    background-color: #23272A;
+    color: #fff;
+    outline: 0;
+    height: 90%;
+    border: 1.5px solid #5663F7;
+    border-radius: 5px;
+    padding: 1px;
 }

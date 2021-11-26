@@ -16,7 +16,6 @@ const Navbar = ({ userName, logout }) => {
                     variant="contained"
                     type="submit"
                     sx={{
-                        color: '#fff',
                         backgroundColor: '#fff',
                         color: '#5663F7',
                         position: 'absolute',

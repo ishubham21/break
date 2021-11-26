@@ -33,7 +33,6 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
                     variant="contained"
                     type="submit"
                     sx={{
-                        color: '#fff',
                         backgroundColor: '#fff',
                         color: '#5663F7',
                         marginRight: '15px',
@@ -52,7 +51,6 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
                     variant="contained"
                     type="submit"
                     sx={{
-                        color: '#fff',
                         backgroundColor: '#fff',
                         color: '#5663F7',
                         marginRight: '15px',
@@ -79,7 +77,7 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
                         borderColor: '#fff',
                         marginRight: '35px'
                     }}
-                    onChange={(e) => { console.log(e.target.value); setLanguage(e.target.value) }}
+                    onChange={(e) => { setLanguage(e.target.value) }}
                 >
                     <MenuItem value={'c'}>C</MenuItem>
                     <MenuItem value={'cpp'}>C++</MenuItem>
@@ -93,7 +91,6 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
                     variant="contained"
                     type="submit"
                     sx={{
-                        color: '#fff',
                         backgroundColor: '#fff',
                         color: '#5663F7',
                         '&:hover': {

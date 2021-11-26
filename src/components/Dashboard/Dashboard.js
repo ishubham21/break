@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import CodeBlock from './components/CodeBlock/CodeBlock'
 import Navbar from '../Navbar/Navbar'
 import styles from './Dashboard.module.css'
-import { Drawer, Box, AppBar, Fab, Card } from '@mui/material'
+import { Drawer, Box, AppBar, Fab } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
-import codingImg from './../../assets/coding.png'
 
 const Dashboard = () => {
 
@@ -42,8 +41,12 @@ const Dashboard = () => {
                 if (!hasError) {                      //setting values incase of no errors 
                     setLoadingMsg(null)
                     setUserData(data.user)
-                    setUserCodes(data.content)
                     setNotLoaded(false)
+
+                    //to prevent empty rendering
+                    if (data.content.length !== 0) {
+                        setUserCodes(data.content)
+                    }
 
                     //storing the userId in sessionStorage to use it in Editor.js
                     //using sessionStorage because this data is rendered each time the user opens dashboard (due to useEffect hook) and hence no need to store the data after the tab has been closed 
@@ -65,14 +68,7 @@ const Dashboard = () => {
             {userData && <div className={styles.wrapper}>
 
                 <Box sx={{ display: 'flex', height: '100%' }}>
-                    <AppBar
-                        position="fixed"
-                        sx={{
-                            width: `calc(100% - ${drawerWidth}px)`,
-                            ml: `${drawerWidth}px`
-                        }}
-                    >
-                    </AppBar>
+                    <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }} />
                     <Drawer
                         sx={{
                             width: drawerWidth,
@@ -94,38 +90,19 @@ const Dashboard = () => {
                         <Navbar userName={userData.name} logout={logout} />
                     </Drawer>
 
-                    <Box component="main"
-                        sx={{
-                            flexGrow: 1,
-                            p: 3,
-                            position: 'relative'
-                        }}>
+                    <Box component="main" sx={{ flexGrow: 1, p: 3, position: 'relative' }}>
 
-                        {/* <Box sx={{
-                            width: '70%',
-                            padding: '30px 10px',
-                            borderRadius: '8px',
-                            margin: '20px auto',
-                            color: '#000',
-                            backgroundColor: '#fff',
-                            position: 'relative',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <img src={codingImg} alt="Coding Illustration" className={styles.codingImg}/>
-                        </Box> */}
-
+                        <p className={styles.codesHead}>My Codes</p>
                         {userCodes && <Box>
-                            <p className={styles.codesHead}>My Codes</p>
-                            <Box sx={{
-                                display: 'flex',
-                                padding: '10px'
-                            }}>
+                            <Box sx={{display: 'flex', padding: '10px' }}>
                                 {userCodes.map(code => (
                                     <CodeBlock fileName={code.fileName} codeId={code._id} lang={code.language} key={code._id} />
                                 ))}
                             </Box>
+                        </Box>}
+
+                        {!userCodes && <Box sx={{ textAlign: 'center', marginTop: '50px' }}>
+                            Nothing here, click on the add button to start coding
                         </Box>}
 
                         <Link to='/dashboard/code' x={{ display: 'block' }}>
@@ -144,10 +121,8 @@ const Dashboard = () => {
 
                     </Box>
                 </Box>
-
             </div>}
         </div>
-
     )
 }
 

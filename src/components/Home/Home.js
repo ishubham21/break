@@ -12,7 +12,6 @@ const Home = () => {
     const [statusText, setStatusText] = useState(null)  //to set the alert toast
     
     //making sure that the window is opened only in the desktop window
-    const width = window.innerWidth
     if (window.innerWidth < 800) {
         return (
             <div className={styles.smallScreenMsg}>
