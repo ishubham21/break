@@ -2,7 +2,7 @@ import { Button, Box, Select, MenuItem } from '@mui/material'
 import { Link, useHistory } from 'react-router-dom'
 import styles from './../Ide.module.css'
 
-const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
+const IdeNavbar = ({ lang, fileName, setFileName, saveCode, currentLang }) => {
 
     const history = useHistory()
 
@@ -77,12 +77,12 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, setLanguage }) => {
                         borderColor: '#fff',
                         marginRight: '35px'
                     }}
-                    onChange={(e) => { setLanguage(e.target.value) }}
+                    onChange={(e) => { currentLang(e.target.value) }}
                 >
                     <MenuItem value={'c'}>C</MenuItem>
                     <MenuItem value={'cpp'}>C++</MenuItem>
                     <MenuItem value={'java'}>Java</MenuItem>
-                    <MenuItem value={'py'}>Python</MenuItem>
+                    <MenuItem value={'python'}>Python</MenuItem>
                     <MenuItem value={'javascript'}>JavaScript</MenuItem>
 
                 </Select>}

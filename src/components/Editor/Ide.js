@@ -20,6 +20,15 @@ const Ide = () => {
     const search = useLocation().search
     const codeId = new URLSearchParams(search).get('id');
 
+    //functions to be passed as props
+    //updating the language 
+    //MAJOR! - the code in CodeEditor was not getting updated, so we have used a key value there to perform rerendering
+    const updateLang = (language) => {
+        console.log(language)
+        setLanguage(language)
+        setCode(getCode(language))
+    }
+
     //function to create a request
     const saveCode = () => {
 
@@ -67,24 +76,25 @@ const Ide = () => {
             setFileName(getRandomString())
             setLanguage('cpp')
         }
-    }, [])
+    }, [codeId])
 
     return (
         <>
-            {code && <div className={styles.container}>
+            <div className={styles.container}>
                 <IdeNavbar
                     lang={language}
                     fileName={fileName}
                     setFileName={setFileName}
                     saveCode={saveCode}
-                    setLanguage={setLanguage}
+                    currentLang={updateLang}
                 />
                 <CodeEditor
                     code={code}
+                    language={language}
                     setCode={setCode}
                     setInput={setInput}
                 />
-            </div>}
+            </div>
         </>
     )
 }

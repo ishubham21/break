@@ -2,15 +2,17 @@ import { Box, Grid } from "@mui/material"
 import Editor from '@monaco-editor/react'
 import styles from './../Ide.module.css'
 
-const CodeEditor = ({ code, setCode, setInput }) => {
+const CodeEditor = ({ code, language, setCode, setInput }) => {
     return (
-        <Box>
+        <Box key={language}> {/* using this to update the code everytime the language changes - react rerenders when the key is updated */}
             <Grid container spacing={0} sx={{ height: '92vh' }}>
                 <Grid item xs={9}>
                     <Editor
                         defaultValue={code}
+                        defaultLanguage={language}
                         theme="vs-dark"
                         onChange={(value) => {
+                            console.log(value)
                             setCode(value)
                         }}
                     >
