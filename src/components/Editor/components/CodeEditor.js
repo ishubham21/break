@@ -12,7 +12,6 @@ const CodeEditor = ({ code, language, setCode, setInput, output }) => {
                         defaultLanguage={language}
                         theme="vs-dark"
                         onChange={(value) => {
-                            console.log(value)
                             setCode(value)
                         }}
                     >

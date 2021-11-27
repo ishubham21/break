@@ -38,7 +38,6 @@ const Ide = () => {
                 .then(res => res.json())
                 .then(async ({ error, data }) => {
                     if (error === null) {
-                        console.log(data);
                         setCode(data.code)
                         setInput(data.input)
                         setLanguage(data.language)
@@ -138,6 +137,11 @@ const Ide = () => {
 
                 }
                 else {
+                    setStatusText({
+                        text: "An error occured!",
+                        severity: 'error'
+                    })
+                    console.log(error)
                     setOutput(error)
                 }
             })
