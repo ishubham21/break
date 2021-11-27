@@ -11,7 +11,7 @@ const Ide = () => {
     const [code, setCode] = useState(null)
     const [fileName, setFileName] = useState(null)
     const [language, setLanguage] = useState(null)
-    const [input, setInput] = useState(0)    //since input is required during the post request
+    const [input, setInput] = useState("0")    //since input is required during the post request - input.txt will not be saved without it
     const userId = sessionStorage.getItem('userId') //picking up the user id from the session storage
     const [output, setOutput] = useState(null)
 
@@ -19,34 +19,6 @@ const Ide = () => {
     //using useLocation hook to find the id
     const search = useLocation().search
     const codeId = new URLSearchParams(search).get('id');
-
-    //functions to be passed as props
-    //updating the language 
-    //MAJOR! - the code in CodeEditor was not getting updated, so we have used a key value there to perform rerendering
-    const updateLang = (language) => {
-        console.log(language)
-        setLanguage(language)
-        setCode(getCode(language))
-    }
-
-    //function to create a request
-    const saveCode = () => {
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fileName, code, input, userId, language
-            })
-        }
-        fetch('http://localhost:4000/ide/save', requestOptions)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
-    }
 
     //rendering this code each time the user opens his/her old codes
     useEffect(() => {
@@ -78,6 +50,57 @@ const Ide = () => {
         }
     }, [codeId])
 
+    //functions to be passed as props
+    //updating the language 
+    //MAJOR! - the code in CodeEditor was not getting updated, so we have used a key value there to perform rerendering
+    const updateLang = (language) => {
+        setLanguage(language)
+        setCode(getCode(language))
+    }
+
+    //function to create a request
+    const saveCode = () => {
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fileName, code, input, userId, language
+            })
+        }
+        fetch('http://localhost:4000/ide/save', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    const runCode = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fileName, code, input, userId, language
+            })
+        }
+
+        fetch('http://localhost:4000/ide/run', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
         <>
             <div className={styles.container}>
@@ -86,6 +109,7 @@ const Ide = () => {
                     fileName={fileName}
                     setFileName={setFileName}
                     saveCode={saveCode}
+                    runCode={runCode}
                     currentLang={updateLang}
                 />
                 <CodeEditor

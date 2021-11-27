@@ -2,7 +2,7 @@ import { Button, Box, Select, MenuItem } from '@mui/material'
 import { Link, useHistory } from 'react-router-dom'
 import styles from './../Ide.module.css'
 
-const IdeNavbar = ({ lang, fileName, setFileName, saveCode, currentLang }) => {
+const IdeNavbar = ({ lang, fileName, setFileName, saveCode, runCode, currentLang }) => {
 
     const history = useHistory()
 
@@ -18,6 +18,7 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, currentLang }) => {
             display: 'flex',
             alignItems: 'center',
             color: '#fff',
+            mb: '10px'
         }}>
             <Link to='/'>
                 <h4 className={styles.heading}>Break</h4>
@@ -42,7 +43,7 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, currentLang }) => {
                             color: '#fff'
                         }
                     }}
-                    onClick={() => { logout() }}
+                    onClick={() => { runCode() }}
                 >
                     Run
                 </Button>
