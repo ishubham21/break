@@ -1,4 +1,5 @@
 import styles from './Ide.module.css'
+import { Alert } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
 import getCode from '../../helpers/getCode'
@@ -8,12 +9,14 @@ import CodeEditor from './components/CodeEditor'
 
 const Ide = () => {
 
+    const [statusText, setStatusText] = useState(null)
+
     const [code, setCode] = useState(null)
     const [fileName, setFileName] = useState(null)
     const [language, setLanguage] = useState(null)
     const [input, setInput] = useState("0")    //since input is required during the post request - input.txt will not be saved without it
     const userId = sessionStorage.getItem('userId') //picking up the user id from the session storage
-    const [output, setOutput] = useState(null)
+    const [output, setOutput] = useState("Your output will appear here")
 
     //catching the codeId from the url
     //using useLocation hook to find the id
@@ -61,6 +64,13 @@ const Ide = () => {
     //function to create a request
     const saveCode = () => {
 
+        //setting the initial values of the status trackers
+        setStatusText({
+            text: "Saving your code...",
+            severity: "info"
+        })
+
+        //request options that contain the detailed info about the request
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -72,15 +82,39 @@ const Ide = () => {
         }
         fetch('http://localhost:4000/ide/save', requestOptions)
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(({ error, data }) => {
+
+                //detecting if ther's an error
+                const hasError = error != null
+                setStatusText({
+                    text: hasError ? `${error}` : "Your code has been saved!",
+                    severity: hasError ? `error` : `success`
+                })
+
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
+                //setting the texts in case of error
+                setStatusText({
+                    text: "Error occured, try again!",
+                    severity: 'error'
+                })
             })
+
+        //nullifying the values to remove them from the DOM
+        setTimeout(() => {
+            setStatusText(null)
+        }, 4000)
     }
 
+    //function to run the code
     const runCode = () => {
+
+        //setting the initial values of the status tracker
+        setStatusText({
+            text: "Compiling the code...",
+            severity: 'info'
+        })
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -93,12 +127,31 @@ const Ide = () => {
 
         fetch('http://localhost:4000/ide/run', requestOptions)
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(({ error, data }) => {
+                if (error === null) {
+
+                    setOutput(data)
+                    setStatusText({
+                        text: "Output has been generated!",
+                        severity: 'success'
+                    })
+
+                }
+                else {
+                    setOutput(error)
+                }
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
+                setStatusText({
+                    text: "Error occured, try again!",
+                    severity: 'error'
+                })
             })
+        
+        //nullifying these values to make sure they are removed from the DOM
+        setTimeout(() => {
+            setStatusText(null)
+        }, 4000)
     }
 
     return (
@@ -117,7 +170,12 @@ const Ide = () => {
                     language={language}
                     setCode={setCode}
                     setInput={setInput}
+                    output={output}
                 />
+
+                {statusText && <div  className={styles.alertToast}><Alert severity={statusText.severity}>
+                    {statusText.text}
+                </Alert></div>}
             </div>
         </>
     )

@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material"
 import Editor from '@monaco-editor/react'
 import styles from './../Ide.module.css'
 
-const CodeEditor = ({ code, language, setCode, setInput }) => {
+const CodeEditor = ({ code, language, setCode, setInput, output }) => {
     return (
         <Box key={language}> {/* using this to update the code everytime the language changes - react rerenders when the key is updated */}
             <Grid container spacing={0} sx={{ height: '92vh' }}>
@@ -18,16 +18,19 @@ const CodeEditor = ({ code, language, setCode, setInput }) => {
                     >
                     </Editor>
                 </Grid>
-                <Grid item container xs={3} sx={{ color: '#fff', textAlign: 'center' }}>
-                    <Grid item xs={12} sx={{ height: '50%', mt: '20px' }}>
-                        <h4>Enter Input</h4>
-                        <Box sx={{ p: '10px', height: '95%' }}>
+                <Grid item xs={3} sx={{ color: '#fff' }}>
+                    <Box sx={{ height: '50%', p: '15px', textAlign: 'center' }}>
+                        <h4 className={styles.headText}>Enter Input</h4>
+                        <Box sx={{ width: '100%', height: '100%' }}>
                             <textarea aria-label="input" placeholder="Input here..." className={styles.inputBox} onChange={(e) => { setInput(e.target.value) }} />
                         </Box>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <h4>Output</h4>
-                    </Grid>
+                    </Box>
+                    <Box sx={{ height: '50%', p: '15px' }}>
+                        <h4 className={styles.headText}>Output here</h4>
+                        {output && <Box sx={{ width: '100%', height: '100%', mt: '20px' }}>
+                            {output}
+                        </Box>}
+                    </Box>
                 </Grid>
             </Grid>
         </Box>

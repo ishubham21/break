@@ -22,12 +22,24 @@
 
 .inputBox{
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
     background-color: #23272A;
     color: #fff;
     outline: 0;
-    height: 90%;
+    height: 86%;
     border: 1.5px solid #5663F7;
     border-radius: 5px;
     padding: 1px;
+
+}
+
+.headText{
+    text-align: center;
+}
+
+.alertToast{
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
 }
