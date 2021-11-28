@@ -45,7 +45,8 @@ const Dashboard = () => {
 
                     //to prevent empty rendering
                     if (data.content.length !== 0) {
-                        setUserCodes(data.content)
+                        setUserCodes(data.content.reverse())
+
                     }
 
                     //storing the userId in sessionStorage to use it in Editor.js
