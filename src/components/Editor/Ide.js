@@ -141,7 +141,6 @@ const Ide = () => {
                         text: "An error occured!",
                         severity: 'error'
                     })
-                    console.log(error)
                     setOutput(error)
                 }
             })
