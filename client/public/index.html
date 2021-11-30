@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#fff" />
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -14,8 +14,22 @@
     <title>Break</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>A personalised code editor.</noscript>
     <div id="root"></div>
-    
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('sw.js').then(registration => {
+            console.log(registration.scope);
+          }, error => {
+            console.log('Worker registration failed', error);
+          }).catch(error => {
+            console.log(error);
+          });
+        });
+      } else {
+        console.log('Service Worker is not supported by browser.');
+      }
+    </script>
   </body>
 </html>
