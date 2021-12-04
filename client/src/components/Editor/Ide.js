@@ -27,7 +27,7 @@ const Ide = () => {
     useEffect(() => {
         //if id is not null that means the user is creating a new code
         if (codeId) {
-            const url = `https://code-executor-backend-ishubham21.vercel.app/code?id=${codeId}`
+            const url = `http://localhost:4000/code?id=${codeId}`
             fetch(url, {
                 method: 'GET',
                 headers: {
@@ -79,7 +79,7 @@ const Ide = () => {
                 fileName, code, input, userId, language
             })
         }
-        fetch('https://code-executor-backend-ishubham21.vercel.app/ide/save', requestOptions)
+        fetch('http://localhost:4000/ide/save', requestOptions)
             .then(res => res.json())
             .then(({ error, data }) => {
 
@@ -124,7 +124,7 @@ const Ide = () => {
             })
         }
 
-        fetch('https://code-executor-backend-ishubham21.vercel.app/ide/run', requestOptions)
+        fetch('http://localhost:4000/ide/run', requestOptions)
             .then(res => res.json())
             .then(({ error, data }) => {
                 if (error === null) {
