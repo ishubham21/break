@@ -35,7 +35,7 @@ const Register = ({ setStatusText, setIsLogin }) => {
                     password
                 })
             }
-            fetch('http://localhost:4000/user/register', requestOptions)
+            fetch('https://code-executor-backend-ishubham21.vercel.app/user/register', requestOptions)
                 .then(res => res.json())
                 .then(({ error }) => {
 

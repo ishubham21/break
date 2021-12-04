@@ -28,7 +28,7 @@ const Dashboard = () => {
 
     //running a function every time the dashboard is loaded
     useEffect(() => {
-        fetch('http://localhost:4000/dashboard', {
+        fetch('https://code-executor-backend-ishubham21.vercel.app/dashboard', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
