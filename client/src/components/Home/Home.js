@@ -16,9 +16,8 @@ const Home = () => {
 
     //using useCallback hook since we're passing it down to as a prop
     const redirectAfterSuccess = useCallback(() => {
-        console.log(history);
         history.push({ pathname: '/' })
-    }, [])
+    }, [history])
 
     //making sure that the window is opened only in the desktop window
     if (window.innerWidth < 800) {
