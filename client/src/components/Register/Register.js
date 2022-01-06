@@ -20,7 +20,7 @@ const Register = ({ setStatusText, setIsLogin }) => {
             //setting display message for the user
             setStatusText({
                 text: "Creating your account...",
-                severity: "success"
+                severity: "info"
             })
 
             //making a POST request to the register API 
@@ -49,6 +49,8 @@ const Register = ({ setStatusText, setIsLogin }) => {
                         e.target.reset()
                         setTimeout(() => {
                             setStatusText(null)
+
+                            //redirecting the user to login
                             setIsLogin(true)
                         }, 2000)
                     }

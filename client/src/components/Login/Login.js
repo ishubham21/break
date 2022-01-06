@@ -1,13 +1,11 @@
 import styles from './Login.module.css'
 import { useState } from 'react'
-import { useHistory } from 'react-router'
 import { TextField, Button } from '@mui/material'
 
-const Login = ({ setStatusText, setIsLogin }) => {
+const Login = ({ setStatusText, setIsLogin, redirectAfterSuccess }) => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     //for redirection purposes
-    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -49,7 +47,7 @@ const Login = ({ setStatusText, setIsLogin }) => {
                     //redirecting users to the dashboard after 3s
                     setTimeout(() => {
                         setStatusText(null)    //nullifying this to remove the value from the home    
-                        history.push('/dashboard')
+                        redirectAfterSuccess()  //the function passed down from the parent to redirect to dashboard
                     }, 3000)
                 }
             })

@@ -17,12 +17,12 @@ const Dashboard = () => {
 
     //for navigating around the routes
     const [userData, setUserData] = useState(null)
-    const history = useHistory()
-
     const [userCodes, setUserCodes] = useState(null)    //for getting all the previous codes of the users 
 
+    const history = useHistory()
     const logout = () => {  //function to clear users' data from the localStorage and redirect them to the login page
         localStorage.clear()
+        sessionStorage.clear()
         history.push('/home')
     }
 

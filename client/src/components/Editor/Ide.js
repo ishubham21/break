@@ -25,7 +25,7 @@ const Ide = () => {
 
     //rendering this code each time the user opens his/her old codes
     useEffect(() => {
-        //if id is not null that means the user is creating a new code
+        //if codeId is null that means the user is creating a new code
         if (codeId) {
             const url = `https://code-executor-backend-ishubham21.vercel.app/code?id=${codeId}`
             fetch(url, {

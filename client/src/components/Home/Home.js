@@ -3,14 +3,23 @@ import Grid from '@mui/material/Grid'
 import peaceImg from './../../assets/smallScreen.png'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Alert } from '@mui/material'
+import { useHistory } from 'react-router-dom'
 
 const Home = () => {
 
     const [isLogin, setIsLogin] = useState(true)    //decides which component to render
     const [statusText, setStatusText] = useState(null)  //to set the alert toast
-    
+
+    const history = useHistory()
+
+    //using useCallback hook since we're passing it down to as a prop
+    const redirectAfterSuccess = useCallback(() => {
+        console.log(history);
+        history.push({ pathname: '/' })
+    }, [])
+
     //making sure that the window is opened only in the desktop window
     if (window.innerWidth < 800) {
         return (
@@ -30,7 +39,7 @@ const Home = () => {
                     for developers, by developers
                 </Grid>
                 <Grid item md={8} className={styles.innerGrid}>
-                    {isLogin ? <Login setStatusText={setStatusText} setIsLogin={setIsLogin} /> : <Register setStatusText={setStatusText} setIsLogin={setIsLogin} />}
+                    {isLogin ? <Login setStatusText={setStatusText} setIsLogin={setIsLogin} redirectAfterSuccess={redirectAfterSuccess} /> : <Register setStatusText={setStatusText} setIsLogin={setIsLogin} />}
                 </Grid>
             </Grid>
 

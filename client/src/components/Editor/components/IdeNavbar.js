@@ -8,6 +8,7 @@ const IdeNavbar = ({ lang, fileName, setFileName, saveCode, runCode, currentLang
 
     const logout = () => {  //function to clear users' data from the localStorage and redirect them to the login page
         localStorage.clear()
+        sessionStorage.clear()
         history.push('/home')
     }
 
