@@ -21,6 +21,15 @@ const saveFile = (fileName, code) => {
     })
 }
 
+/**
+Error codes with their meanings - 
+0: System was not able to save the file
+1: A compile-time error has occured
+2: A run-time error has occured - only for C, C++, and Java
+
+Keeping a track of error helps us in clearing the generated files as per requirements
+It also helps us in trackins the failure status 
+*/
 const executeCode = (code, input, language) => {
     return new Promise((resolve, reject) => {
 
