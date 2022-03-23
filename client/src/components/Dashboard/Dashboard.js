@@ -95,7 +95,11 @@ const Dashboard = () => {
 
                         <p className={styles.codesHead}>My Codes</p>
                         {userCodes && <Box>
-                            <Box sx={{display: 'flex', padding: '10px' }}>
+                            <Box sx={{
+                                display: 'flex',
+                                padding: '10px',
+                                flexWrap: 'wrap',
+                            }}>
                                 {userCodes.map(code => (
                                     <CodeBlock fileName={code.fileName} codeId={code._id} lang={code.language} key={code._id} />
                                 ))}

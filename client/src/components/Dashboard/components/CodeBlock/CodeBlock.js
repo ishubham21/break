@@ -22,6 +22,7 @@ const CodeBlock = ({ fileName, codeId, lang }) => {
                 textAlign: 'center',
                 cursor: 'pointer',
                 marginLeft: '20px',
+                marginTop: '10px',
                 position: 'relative'
             }}
             onClick={() => { loadEditor(codeId) }}
