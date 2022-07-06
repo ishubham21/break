@@ -10,7 +10,7 @@ Break currently supports all the major programming languages including C, C++, J
 
 ### JWT Workflow for Login and Registration 
 
-<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/jwt-workflow.png"></p>
+<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/jwt-workflow.jpeg"></p>
 
 ## Features
 - Break is an online-code-executor (sandbox environment) where users can not only run their code online but also save it for later. It currently supports all the major programming languages including C, C++, Java, Python, and JavaScript.
