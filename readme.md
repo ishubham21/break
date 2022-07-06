@@ -7,6 +7,8 @@ Break currently supports all the major programming languages including C, C++, J
 
 ## Workflow 
 
+A flowchart showcasing an overview of the application flow
+<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/workflow.png"></p>
 
 ### JWT Workflow for Login and Registration 
 
