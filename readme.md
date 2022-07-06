@@ -1,8 +1,16 @@
 # Break 
 
+### Designed and Developed by Shubham Gautam
 Developed using React, Node, and mongoDB, Break is an online-code-executor (sandbox environment) where users can not only run their code online, but also save it for later. 
 
 Break currently supports all the major programming languages including C, C++, Java, Python, and JavaScript. 
+
+## Workflow 
+
+
+### JWT Workflow for Login and Registration 
+
+<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/jwt-workflow.png"></p>
 
 ## Features
 - Break is an online-code-executor (sandbox environment) where users can not only run their code online but also save it for later. It currently supports all the major programming languages including C, C++, Java, Python, and JavaScript.
@@ -14,6 +22,30 @@ Break currently supports all the major programming languages including C, C++, J
 - The frontend of the application is developed keeping in mind all the errors that can occur to prevent application from breaking at any point. 
 - Implemented caching to enhance user-experience of the application.
 - Converted the application into a Progressive Web App to make sure that it is downloadable on any Operating System.    
+- The backend of this application is designed keeping in mind the MVC-architecture. 
+## Technology Stack:
+- **Frontend**: React, MaterialUI
+- **Backend**: Node.js (+child processed), Express.js
+- **User Authentication**: JSON-Web-Token
+- **IDE**: VS Code
+- **Design**: Adobe Photoshop, Canva
+- **API Testing & Documentation**: Postman
+- **Version Control**: Git and GitHub
+- **Database**: MongoDB
+- **Hosting**: Vercel
+
+## Project Folder Structure
+| S.No. | Folder Name | Purpose |
+| --------------- | --------------- | --------------- |
+| 1. | server | contains all backend code  |
+| 2. | server/controllers | contains all backend controller code  |
+| 3. | server/executors | contains all backend code-execution (+child processed) related code  |
+| 4. | server/middlewares | contains all backend middlewares code  |
+| 5. | server/model | contains all data models  |
+| 6. | server/routes | contains all backend API routes code  |
+| 7. | client | contains all frontend code (React)|
+| 8. | readme.md | contains all documentation |
+| 8. | LICENSE | contains the offical GNU General Public License issued towards this code |
 
 ## Images
 
