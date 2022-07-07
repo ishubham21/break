@@ -52,6 +52,36 @@ A flowchart showcasing an overview of the application flow
 | 8. | readme.md | contains all documentation |
 | 8. | LICENSE | contains the offical GNU General Public License issued towards this code |
 
+## Setting up the application on your local environment
+
+### Backend
+
+ - Make sure to create an .env file. The structure of the env file is listed in (env.exammple)[server/env.example]
+
+ ```
+cd server
+npm install
+node index.js
+ ```
+
+Now wait for the terminal to show "Connected successfully" message. 
+
+Your backend is now active on the PORT 4000
+
+If you want to try a hosted backend service, without having to set-up everything by yourself, use this (link)[https://code-executor-backend-ishubham21.vercel.app/] as the base. Just make sure you have obtained all the permissions before using the hosted version of the backend. 
+
+Please note - some services might not work on the hosted backend. 
+### Frontend 
+ - Make sure you have node & npm/yarn installed
+ - Make sure your server is up and running
+
+```
+cd client
+npm install
+npm run start
+```
+
+You can access the application at (http://localhost:3000)[http://localhost:3000]
 ## Images
 
 1. **Login Screen** 
@@ -76,3 +106,7 @@ A flowchart showcasing an overview of the application flow
 - Deleting the account - The user will be able to dlete his/her user-account if he/she doesn't want to continue with Break.
 - Adding support for more languages - We have covered almost all the major languages, but I want to extend it to support more languages like Rust, and Swift. 
 - Using WebRTC and socket, I want to extend Break as an interviewing platform where users would be able to create interview rooms, connect over a video-based call, and share the live code with everyone present in the room.  
+
+## License
+
+Read more about the License (here)[LICENSE]
