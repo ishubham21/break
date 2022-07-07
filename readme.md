@@ -8,12 +8,15 @@ Break currently supports all the major programming languages including C, C++, J
 ## Workflow 
 
 A flowchart showcasing an overview of the application flow
-<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/workflow.png"></p>
+<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/app-workflow.png"></p>
 
 ### JWT Workflow for Login and Registration 
 
 <p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/jwt-workflow.jpeg"></p>
 
+### How IDE works (IDE Workflow)
+<p><img src="https://github.com/ishubham21/break/blob/master/readme-assets/execution-workflow.png"></p>
+ 
 ## Features
 - Break is an online-code-executor (sandbox environment) where users can not only run their code online but also save it for later. It currently supports all the major programming languages including C, C++, Java, Python, and JavaScript.
 - Break makes use of React to facilitate the frontend of the application, Node & Express as the backend, and MongoDB as the database.
