@@ -56,7 +56,7 @@ A flowchart showcasing an overview of the application flow
 
 ### Backend
 
- - Make sure to create an .env file. The structure of the env file is listed in (env.exammple)[server/env.example]
+ - Make sure to create an .env file. The structure of the env file is listed in [env.exammple](server/env.example)
 
  ```
 cd server
@@ -68,7 +68,7 @@ Now wait for the terminal to show "Connected successfully" message.
 
 Your backend is now active on the PORT 4000
 
-If you want to try a hosted backend service, without having to set-up everything by yourself, use this (link)[https://code-executor-backend-ishubham21.vercel.app/] as the base. Just make sure you have obtained all the permissions before using the hosted version of the backend. 
+If you want to try a hosted backend service, without having to set-up everything by yourself, use this [here](https://code-executor-backend-ishubham21.vercel.app/) as the base. Just make sure you have obtained all the permissions before using the hosted version of the backend. 
 
 Please note - some services might not work on the hosted backend. 
 ### Frontend 
@@ -81,7 +81,7 @@ npm install
 npm run start
 ```
 
-You can access the application at (http://localhost:3000)[http://localhost:3000]
+You can access the application at [http://localhost:3000](http://localhost:3000)
 ## Images
 
 1. **Login Screen** 
@@ -109,4 +109,4 @@ You can access the application at (http://localhost:3000)[http://localhost:3000]
 
 ## License
 
-Read more about the License (here)[LICENSE]
+Read more about the License [here](LICENSE)
